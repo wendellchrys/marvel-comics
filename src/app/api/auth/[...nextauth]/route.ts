@@ -3,10 +3,11 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import EmailProvider from "next-auth/providers/email";
 import { Resend } from "resend";
+import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -18,17 +19,14 @@ export const authOptions: NextAuthOptions = {
     }),
     EmailProvider({
       async sendVerificationRequest({ identifier, url }) {
-        const loginUrl = url;
-        const email = identifier;
-
         try {
           await resend.emails.send({
             from: "Seu Nome <no-reply@seu-dominio.com>",
-            to: email,
+            to: identifier,
             subject: "Seu link de login",
             html: `<p>Olá,</p>
                    <p>Clique no link abaixo para acessar sua conta:</p>
-                   <a href="${loginUrl}">Entrar</a>
+                   <a href="${url}">Entrar</a>
                    <p>Se você não solicitou este email, ignore-o.</p>`,
           });
         } catch (error) {
@@ -49,4 +47,10 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export async function GET(req: NextRequest) {
+  return handler(req, NextResponse.json);
+}
+
+export async function POST(req: NextRequest) {
+  return handler(req, NextResponse.json);
+}
