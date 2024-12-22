@@ -55,10 +55,12 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
+      "cursor-pointer",
       className
     )}
     {...props}
   />
+
 );
 PaginationLink.displayName = "PaginationLink";
 

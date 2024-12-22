@@ -4,15 +4,17 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { useFavoritesModal } from "@/app/context/FavoritesModalContext";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { openModal } = useFavoritesModal();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -20,12 +22,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Teste</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive>
-                  <a href="#">Página de Teste</a>
+                  <a href="/dashboard/comics">Comics</a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton onClick={openModal}>
+                  Favoritos
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
