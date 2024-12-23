@@ -9,7 +9,7 @@ import Pagination, {
     PaginationPrevious,
     PaginationNext,
 } from "@/components/ui/pagination";
-import { ComicCard } from "@/components";
+import { ComicCard, Loading } from "@/components";
 import { useFavoritesModal } from "@/app/context/FavoritesModalContext";
 
 type Comic = {
@@ -20,14 +20,13 @@ type Comic = {
 
 const ComicsPage = () => {
     const [comics, setComics] = useState<Comic[]>([]);
-    const [favorites, setFavorites] = useState<Comic[]>([]);
     const [search, setSearch] = useState<string>("");
     const [debouncedSearch, setDebouncedSearch] = useState<string>("");
     const [page, setPage] = useState<number>(1);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [totalPages, setTotalPages] = useState<number>(1);
 
-    const { isModalOpen, closeModal } = useFavoritesModal();
+    const { favorites, toggleFavorite } = useFavoritesModal();
 
     const limit = 15;
 
@@ -41,11 +40,6 @@ const ComicsPage = () => {
 
         return () => clearTimeout(handler);
     }, [search]);
-
-    useEffect(() => {
-        const storedFavorites = JSON.parse(localStorage.getItem("favoriteComics") || "[]");
-        setFavorites(storedFavorites);
-    }, []);
 
     const loadComics = useCallback(async () => {
         setIsLoading(true);
@@ -80,17 +74,8 @@ const ComicsPage = () => {
         }
     };
 
-    const toggleFavorite = (comic: Comic) => {
-        const isFavorite = favorites.some((fav) => fav.id === comic.id);
-        const updatedFavorites = isFavorite
-            ? favorites.filter((fav) => fav.id !== comic.id)
-            : [...favorites, comic];
-        setFavorites(updatedFavorites);
-        localStorage.setItem("favoriteComics", JSON.stringify(updatedFavorites));
-    };
-
     const renderPaginationItems = () => {
-        const maxVisiblePages = 3;
+        const maxVisiblePages = 2;
         const items = [];
 
         if (page > maxVisiblePages + 1) {
@@ -140,7 +125,7 @@ const ComicsPage = () => {
             />
 
             {isLoading ? (
-                <p>Carregando...</p>
+                <Loading />
             ) : (
                 <div className="grid gap-4 grid-cols-1 md:grid-cols-5">
                     {comics.map((comic) => (
@@ -169,38 +154,6 @@ const ComicsPage = () => {
                     />
                 </PaginationContent>
             </Pagination>
-
-            {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white w-11/12 max-w-3xl rounded shadow-lg p-6 overflow-y-auto max-h-[90vh]">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-bold">Favoritos</h2>
-                            <button
-                                className="text-red-500 font-bold"
-                                onClick={closeModal}
-                            >
-                                Fechar
-                            </button>
-                        </div>
-                        {favorites.length === 0 ? (
-                            <p>Você ainda não possui favoritos.</p>
-                        ) : (
-                            <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-                                {favorites.map((comic) => (
-                                    <ComicCard
-                                        key={comic.id}
-                                        id={comic.id}
-                                        title={comic.title}
-                                        thumbnail={comic.thumbnail}
-                                        isFavorited={true}
-                                        toggleFavorite={() => toggleFavorite(comic)}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
