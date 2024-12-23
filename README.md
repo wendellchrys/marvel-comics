@@ -46,9 +46,9 @@ Função responsável por salvar, acessar e remover os comics do localStorage.
 ### marvel
 Função responsável por gerar URLs autenticadas para consumir a API da Marvel. Ele garante que cada requisição inclua os parâmetros de autenticação exigidos pela Marvel.
 
-## **Services**
+## **Api**
 
-### api/marvel/actions
+### marvel/actions
 Serviço com cada rota de requisição separada.
 
 ## **Inicialização do Projeto**
