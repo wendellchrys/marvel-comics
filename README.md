@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marvel Comics
 
-## Getting Started
+![Login](https://i.postimg.cc/Hx6WQHfp/image.png)
+![Marvel Comics](https://i.postimg.cc/5yfvtx8b/image.png)
 
-First, run the development server:
+Este projeto é uma aplicação Next + TypeScript, que permite efetuar login com Google e Github, após o login é possível listar, filtrar e favoritar comics da Marvel. A aplicação inclui página para listagem de Comics com paginação, página para listagem de Comics com scroll infinito e modal para listagem dos favoritos!
 
+## **Destaques**
+
+- **Testes Unitários**: Cobertura completa de todos os componentes, páginas e utils.
+- **Taiwind**: Foi utilizado o taiwind para a criação das classes e responsividade
+- **Axios**: Requisições utilizando o axios, sendo chamadas pelo services/api. Cada chamada tem seu devido tratamento em caso de erro.
+
+## **Páginas**
+
+### Home
+Página inicial que chama o componente de formulário de login
+
+### ComicsPage
+Página de listagem de Comics com Páginação.
+
+### ComicsPageInfiniteScroll
+Página de listagem de Comics com Scroll infinito.
+
+## **Componentes**
+
+### Loading
+Componente de Loading que é utilizado enquanto as requisições estão sendo carregadas.
+
+### ComicCard
+Componente responsável por listar o card de um Comic.
+
+### Modal
+Componente responsável por exibir um modal, no qual é utilizado para exibir os favoritos (mas o componente está totalmente desacoplado, podendo ser usado em outros contextos).
+
+### SearchInput
+Componente responsável por exibir o campo de busca nas páginas de Comics.
+
+### Sidebar
+Componente responsável por exibir o sidebar lateral com o menu.
+
+## **Utils**
+
+### favoriteComics
+Função responsável por salvar, acessar e remover os comics do localStorage.
+
+### marvel
+Função responsável por gerar URLs autenticadas para consumir a API da Marvel. Ele garante que cada requisição inclua os parâmetros de autenticação exigidos pela Marvel.
+
+## **Services**
+
+### api/marvel/actions
+Serviço com cada rota de requisição separada.
+
+## **Inicialização do Projeto**
+
+Para inicializar o projeto, siga os passos abaixo:
+
+1. **Clone o repositório:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/wendellchrys/marvel-comics.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Navegue até o diretório do projeto:**
+```bash
+cd marvel-comics
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Instale as dependências:**
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Inicie o servidor de desenvolvimento:**
+```bash
+pnpm dev
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Abra [http://localhost:3000](http://localhost:3000) com seu navegador para ver o resultado.
