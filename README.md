@@ -9,7 +9,6 @@ Este projeto é uma aplicação Next + TypeScript, que permite efetuar login com
 
 - **Testes Unitários**: Cobertura completa de todos os componentes, páginas e utils.
 - **Taiwind**: Foi utilizado o taiwind para a criação das classes e responsividade
-- **Axios**: Requisições utilizando o axios, sendo chamadas pelo services/api. Cada chamada tem seu devido tratamento em caso de erro.
 
 ## **Páginas**
 
