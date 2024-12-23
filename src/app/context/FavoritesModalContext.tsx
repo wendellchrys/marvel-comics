@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { Comic } from "@/app/types/comics";
 import { ComicCard } from "@/components";
+import { Modal } from "@/components";
 
 type FavoritesModalContextType = {
     isModalOpen: boolean;
@@ -41,37 +42,24 @@ export const FavoritesModalProvider = ({ children }: { children: ReactNode }) =>
             value={{ isModalOpen, openModal, closeModal, favorites, toggleFavorite }}
         >
             {children}
-            {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white w-11/12 max-w-3xl rounded shadow-lg p-6 overflow-y-auto max-h-[90vh]">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-bold">Favoritos</h2>
-                            <button
-                                className="text-red-500 font-bold"
-                                onClick={closeModal}
-                            >
-                                Fechar
-                            </button>
-                        </div>
-                        {favorites.length === 0 ? (
-                            <p>Você ainda não possui favoritos.</p>
-                        ) : (
-                            <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-                                {favorites.map((comic) => (
-                                    <ComicCard
-                                        key={comic.id}
-                                        id={comic.id}
-                                        title={comic.title}
-                                        thumbnail={comic.thumbnail}
-                                        isFavorited={true}
-                                        toggleFavorite={() => toggleFavorite(comic)}
-                                    />
-                                ))}
-                            </div>
-                        )}
+            <Modal isOpen={isModalOpen} onClose={closeModal} title="Favoritos">
+                {favorites.length === 0 ? (
+                    <p>Você ainda não possui favoritos.</p>
+                ) : (
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
+                        {favorites.map((comic) => (
+                            <ComicCard
+                                key={comic.id}
+                                id={comic.id}
+                                title={comic.title}
+                                thumbnail={comic.thumbnail}
+                                isFavorited={true}
+                                toggleFavorite={() => toggleFavorite(comic)}
+                            />
+                        ))}
                     </div>
-                </div>
-            )}
+                )}
+            </Modal>
         </FavoritesModalContext.Provider>
     );
 };

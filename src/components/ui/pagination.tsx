@@ -9,6 +9,7 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
     role="navigation"
     aria-label="pagination"
     className={cn("mx-auto flex w-full justify-center", className)}
+    data-testid="pagination"
     {...props}
   />
 );
@@ -21,6 +22,7 @@ const PaginationContent = React.forwardRef<
   <ul
     ref={ref}
     className={cn("flex flex-row items-center gap-0", className)}
+    data-testid="pagination-content"
     {...props}
   />
 ));
@@ -30,7 +32,12 @@ const PaginationItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn("", className)} {...props} />
+  <li
+    ref={ref}
+    className={cn("", className)}
+    data-testid="pagination-item"
+    {...props}
+  />
 ));
 PaginationItem.displayName = "PaginationItem";
 
@@ -58,9 +65,9 @@ const PaginationLink = ({
       "cursor-pointer",
       className
     )}
+    data-testid={isActive ? "pagination-link-active" : "pagination-link"}
     {...props}
   />
-
 );
 PaginationLink.displayName = "PaginationLink";
 
@@ -72,6 +79,7 @@ const PaginationPrevious = ({
     aria-label="Go to previous page"
     size="default"
     className={cn("gap-0 pl-1.5", className)}
+    data-testid="pagination-previous"
     {...props}
   >
     <ChevronLeft className="h-4 w-4" />
@@ -88,6 +96,7 @@ const PaginationNext = ({
     aria-label="Go to next page"
     size="default"
     className={cn("gap-0 pr-1.5", className)}
+    data-testid="pagination-next"
     {...props}
   >
     <span>Próxima</span>
@@ -103,6 +112,7 @@ const PaginationEllipsis = ({
   <span
     aria-hidden
     className={cn("flex h-8 w-8 items-center justify-center", className)}
+    data-testid="pagination-ellipsis"
     {...props}
   >
     <MoreHorizontal className="h-4 w-4" />

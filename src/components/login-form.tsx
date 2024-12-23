@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { signIn } from "next-auth/react";
-import { Github, Chrome } from "lucide-react";
+import { AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
 
 export function LoginForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -39,7 +39,7 @@ export function LoginForm() {
               className="w-full gap-2"
               onClick={() => handleSocialLogin("google")}
             >
-              <Chrome size={20} />
+              <AiOutlineGoogle size={30} />
               Login com Google
             </Button>
             <Button
@@ -47,7 +47,7 @@ export function LoginForm() {
               className="w-full gap-2"
               onClick={() => handleSocialLogin("github")}
             >
-              <Github size={20} />
+              <AiFillGithub size={25} />
               Login com GitHub
             </Button>
           </div>

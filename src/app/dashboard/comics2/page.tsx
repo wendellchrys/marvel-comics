@@ -24,13 +24,12 @@ const ComicsPageInfiniteScroll = () => {
 
     const limit = 15;
 
-    // Debounce the search input
     useEffect(() => {
         const handler = setTimeout(() => {
             if (search.trim().length === 0 || search.trim().length >= 3) {
                 setPage(1);
-                setComics([]); // Reset comics for new search
-                setHasMore(true); // Allow fetching more results
+                setComics([]);
+                setHasMore(true);
                 setDebouncedSearch(search);
             }
         }, 300);
@@ -38,7 +37,6 @@ const ComicsPageInfiniteScroll = () => {
         return () => clearTimeout(handler);
     }, [search]);
 
-    // Fetch comics data
     const loadComics = useCallback(async () => {
         if (!hasMore) return;
 
@@ -54,9 +52,9 @@ const ComicsPageInfiniteScroll = () => {
             const data = await fetchComics(params);
 
             setComics((prevComics) => [...prevComics, ...data.results]);
-            setHasMore(data.results.length === limit); // Stop fetching if no more results
+            setHasMore(data.results.length === limit);
         } catch (error) {
-            console.error("Erro ao carregar comics:", error);
+            throw new Error("Erro ao carregar comics: " + error);
         } finally {
             setIsLoading(false);
         }
@@ -66,7 +64,6 @@ const ComicsPageInfiniteScroll = () => {
         loadComics();
     }, [page, debouncedSearch, loadComics]);
 
-    // Set up the infinite scroll observer
     const lastComicElementRef = useCallback(
         (node: HTMLElement | null) => {
             if (isLoading) return;

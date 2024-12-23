@@ -19,6 +19,7 @@ export const ComicCard = React.forwardRef<HTMLDivElement, ComicCardProps>(
                 className="relative border rounded overflow-hidden shadow flex flex-col items-center"
             >
                 <button
+                    data-testid="favorite-button"
                     onClick={toggleFavorite}
                     className="absolute top-2 left-2 text-xl text-white hover:text-red-500"
                 >

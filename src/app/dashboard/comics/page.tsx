@@ -56,9 +56,9 @@ const ComicsPage = () => {
             setComics(data.results);
             setTotalPages(Math.ceil(data.total / limit));
         } catch (error) {
-            console.error("Erro ao carregar comics:", error);
             setComics([]);
             setTotalPages(1);
+            throw new Error("Erro ao carregar comics: " + error);
         } finally {
             setIsLoading(false);
         }

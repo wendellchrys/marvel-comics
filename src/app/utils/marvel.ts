@@ -14,6 +14,5 @@ export const buildMarvelUrl = (endpoint: string, params: Record<string, string> 
   const authParams = getAuthParams();
   const queryParams = new URLSearchParams({ ...params, ...authParams });
   const fullUrl = `${MARVEL_API_BASE_URL}${endpoint}?${queryParams.toString()}`;
-  console.log("URL gerada:", fullUrl); // Log para depuração
   return fullUrl;
 };
