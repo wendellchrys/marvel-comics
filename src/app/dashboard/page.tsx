@@ -40,12 +40,13 @@ export default function Dashboard() {
           </div>
         </Link>
 
-        <button onClick={openModal}>
-          <div className="cursor-pointer p-6 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 transition">
-            <h2 className="text-xl font-semibold">Favoritos</h2>
-            <p>Veja seus quadrinhos favoritos salvos.</p>
-          </div>
-        </button>
+        <div
+          className="cursor-pointer p-6 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 transition"
+          onClick={openModal}
+        >
+          <h2 className="text-xl font-semibold">Favoritos</h2>
+          <p>Veja seus quadrinhos favoritos salvos.</p>
+        </div>
       </div>
     </div>
   );
