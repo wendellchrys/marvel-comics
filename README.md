@@ -1,6 +1,6 @@
 # Marvel Comics
 
-![Login](https://i.postimg.cc/Hx6WQHfp/image.png)
+![Login](https://i.postimg.cc/jdLvS9KN/image.png)
 ![Marvel Comics](https://i.postimg.cc/5yfvtx8b/image.png)
 
 Este projeto é uma aplicação Next + TypeScript, que permite efetuar login com Google e Github, após o login é possível listar, filtrar e favoritar comics da Marvel. A aplicação inclui página para listagem de Comics com paginação, página para listagem de Comics com scroll infinito e modal para listagem dos favoritos!
